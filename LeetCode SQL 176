@@ -16,12 +16,20 @@
 +---------------------+
 
 # Write your MySQL query statement below
+# WRONG:
 SELECT Salary AS "SecondHighestSalary"
-FROM (SELECT Salary
+FROM (SELECT DISTINCT Salary
 FROM Employee
-ORDER BY Salary DESC
-     LIMIT 2) AS T
 ORDER BY Salary
+     LIMIT 2) AS T
+ORDER BY T.Salary DESC
 LIMIT 1;
 
-## For problems like "nth highest xxx", use the LIMIT function + ORER BY and subqueries ##
+SELECT 
+(SELECT DISTINCT Salary
+FROM Employee
+ORDER BY Salary DESC
+LIMIT 1 OFFSET 1) 
+AS SecondHighestSalary;
+
+## For problems like "nth highest xxx", use the LIMIT + OFFSET function ##
